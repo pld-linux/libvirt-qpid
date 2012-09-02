@@ -1,0 +1,33 @@
+--- libvirt-qpid-0.2.12/src/NodeWrap.cpp.orig	2012-09-02 19:14:43.244749698 +0200
++++ libvirt-qpid-0.2.12/src/NodeWrap.cpp	2012-09-02 18:38:45.401461339 +0200
+@@ -595,7 +595,7 @@
+     // to keep this all single threaded.  Otherwise a second thread would be
+     // used to implement methods.
+ 
+-    ConnectionSettings settings;
++    qpid::management::ConnectionSettings settings;
+     settings.host = host ? host : "127.0.0.1";
+     settings.port = port;
+ 
+--- libvirt-qpid-0.2.12/src/PoolWrap.cpp.orig	2009-03-02 22:40:36.000000000 +0100
++++ libvirt-qpid-0.2.12/src/PoolWrap.cpp	2012-09-02 19:06:52.708092842 +0200
+@@ -1,6 +1,7 @@
+-
++#include <cstring>
+ #include <libxml/xmlmemory.h>
+ #include <libxml/parser.h>
++#include <qpid/framing/Buffer.h>
+ 
+ #include "NodeWrap.h"
+ #include "PoolWrap.h"
+--- libvirt-qpid-0.2.12/src/Makefile.am.orig	2009-03-02 22:12:00.000000000 +0100
++++ libvirt-qpid-0.2.12/src/Makefile.am	2012-09-02 19:12:06.151419639 +0200
+@@ -46,7 +46,7 @@
+ BUILT_SOURCES = $(generated_file_list)
+ CLEANFILES = $(generated_file_list)
+ 
+-libvirt_qpid_LDADD = -lqpidclient -lqpidcommon -lqmfagent -lvirt $(XML_LIBS)
++libvirt_qpid_LDADD = -lqpidclient -lqpidcommon -lqmf -lvirt $(XML_LIBS)
+ 
+ dist_pkgdata_DATA = libvirt-schema.xml
+ 
